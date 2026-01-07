@@ -41,9 +41,15 @@ The orchestrator itself never writes code - it only coordinates agents that do.
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/orchestrator.git
+git clone https://github.com/Buckits/orchestrator.git
 cd orchestrator
-pip install -r requirements.txt
+
+# Easy setup (creates venv, installs deps)
+./setup.sh
+source venv/bin/activate
+
+# Login to Claude (one-time)
+claude login
 ```
 
 ## Usage
