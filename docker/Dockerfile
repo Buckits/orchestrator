@@ -29,6 +29,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY main.py client.py audit.py ./
 COPY mcp_server/ ./mcp_server/
 COPY prompts/ ./prompts/
+COPY .claude/ ./.claude/
 
 # Make app readable by all users (entrypoint runs as host user)
 RUN chmod -R a+rX /app
@@ -48,4 +49,4 @@ ENV HOST_GID=1000
 ENV HOME=/home/orchestrator
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "main.py", "--project", "/project"]
+CMD ["python", "main.py", "/project"]

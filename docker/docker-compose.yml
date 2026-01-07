@@ -33,4 +33,4 @@ services:
     stdin_open: true
     tty: true
 
-    command: ["python", "main.py", "--project", "/project", "--max-iterations", "${MAX_ITERATIONS:-100}"]
+    command: ["python", "main.py", "/project", "--max-iterations", "${MAX_ITERATIONS:-100}"]

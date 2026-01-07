@@ -15,7 +15,9 @@ The Orchestrator is a Python-based autonomous agent delegation framework. It ini
 # Run orchestration (requires init first)
 ./run.sh /path/to/project
 ./run.sh /path/to/project -n 5         # Limit to 5 iterations
-./run.sh /path/to/project -m sonnet    # Use different model
+
+# Start fresh session (archives existing session)
+./run.sh new /path/to/project
 
 # Check session status
 ./run.sh status /path/to/project
@@ -23,6 +25,7 @@ The Orchestrator is a Python-based autonomous agent delegation framework. It ini
 # Docker variants (same commands)
 ./docker-run.sh init /path/to/project
 ./docker-run.sh /path/to/project
+./docker-run.sh new /path/to/project
 ./docker-run.sh status /path/to/project
 ```
 
