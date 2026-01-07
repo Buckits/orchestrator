@@ -1,0 +1,36 @@
+# Orchestrator Docker Compose
+#
+# Usage:
+#   PROJECT=/path/to/project docker-compose up
+#
+# With explicit UID/GID (recommended):
+#   HOST_UID=$(id -u) HOST_GID=$(id -g) PROJECT=/path/to/project docker-compose up
+#
+# Authentication:
+#   Mounts ~/.claude from host - Claude SDK auto-detects credentials
+#   Login with: claude login
+
+services:
+  orchestrator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+
+    volumes:
+      # Mount target project (required)
+      - ${PROJECT:?PROJECT path is required}:/project
+
+      # Mount Claude credentials from host (SDK auto-detects)
+      - ~/.claude:/home/orchestrator/.claude
+
+    environment:
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-5-20251101}
+      - HOME=/home/orchestrator
+      # Pass host user/group for file permission mapping
+      - HOST_UID=${HOST_UID:-1000}
+      - HOST_GID=${HOST_GID:-1000}
+
+    stdin_open: true
+    tty: true
+
+    command: ["python", "main.py", "--project", "/project", "--max-iterations", "${MAX_ITERATIONS:-100}"]
